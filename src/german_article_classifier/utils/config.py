@@ -1,6 +1,6 @@
 import yaml
 import os
-from pytorch_10kgnad_showcase.utils.custom_logger import CustomLogger
+from german_article_classifier.utils.custom_logger import CustomLogger
 import datetime
 from typing import Union
 

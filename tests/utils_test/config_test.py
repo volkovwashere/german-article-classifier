@@ -1,4 +1,4 @@
-from pytorch_10kgnad_showcase.utils.config import get_root_path, read_yaml
+from german_article_classifier.utils.config import get_root_path, read_yaml
 
 
 def test_read_yaml():
