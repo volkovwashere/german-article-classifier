@@ -1,3 +1,4 @@
 data_path: "D:/10kgerdataset/"
 train_csv: "train.csv"
 test_csv: "test.csv"
+data_csv: "articles.csv"
