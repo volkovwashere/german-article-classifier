@@ -8,7 +8,7 @@ from typing import Union
 def get_root_path() -> str:
     """
     This function returns the root directory absolute path dynamically depending on the current working directory
-    which is usually either src OR test.
+    which is usually either src OR test .
 
     Returns (str): Project root absolute path.
 
@@ -17,7 +17,9 @@ def get_root_path() -> str:
     return os.getcwd().split(work_dir)[0]
 
 
-config_logger = CustomLogger.construct_logger(name="CONFIG", log_file_path=get_root_path() + "logs/CONFIG.log", logger_level=20)
+config_logger = CustomLogger.construct_logger(
+    name="CONFIG", log_file_path=get_root_path() + "logs/CONFIG.log", logger_level=20
+)
 
 
 def read_yaml(*, root_path: str, config_path: str = "properties/dev.yaml") -> Union[dict, None]:
