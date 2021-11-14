@@ -11,7 +11,7 @@ load_logger = CustomLogger.construct_logger(
 
 def load_dataset_from_csv(data_path: str) -> Union[pd.DataFrame, None]:
     """
-    This function loads a CSV as a pandas dataframe and returns it if the file exists else, it raises and logs an error.
+    This function loads a CSV as a pandas dataframe and returns it if the file exists else it raises and logs an error.
     Args:
         data_path (str): Absolute path of the given csv.
 
@@ -21,5 +21,7 @@ def load_dataset_from_csv(data_path: str) -> Union[pd.DataFrame, None]:
     try:
         return pd.read_csv(filepath_or_buffer=data_path)
     except FileNotFoundError as e:
-        load_logger.log_info(message=f"At {datetime.datetime.now()}, file at location: {data_path} was not found. Error: {e}")
+        load_logger.log_info(
+            message=f"At {datetime.datetime.now()}, file at location: {data_path} was not found. Error: {e}"
+        )
         raise

@@ -3,7 +3,12 @@ import pandas as pd
 from german_article_classifier.utils.config import get_root_path, read_yaml
 from german_article_classifier.utils.custom_logger import CustomLogger
 from german_article_classifier.datapipeline.extract import load_dataset_from_csv
-from german_article_classifier.datapipeline.transform import remove_numbers, remove_punctuation, stop_word_removal, map_umlaut
+from german_article_classifier.datapipeline.transform import (
+    remove_numbers,
+    remove_punctuation,
+    stop_word_removal,
+    map_umlaut,
+)
 from typing import Union
 import datetime
 
@@ -17,7 +22,7 @@ def run_pre_processing_pipeline(*, is_split: bool = True, dataset_level: int = 0
     """
     This function transforms and loads the specified dataset for training. Mainly it lowers, removes punctuation,
     numbers, maps umlaut chars to english ones and removes stop words from a given sentence. This function by default
-    loads in either the test or train dataset based on the dataset_level and is_split params, where the latter is
+    loads in either the test or train dataset, based on the dataset_level and is_split params, where the latter is
     TRUE by default. There are 4 dataset type levels:
     0 - no splitting, raw dataset
     1 - train set
@@ -52,7 +57,5 @@ def run_pre_processing_pipeline(*, is_split: bool = True, dataset_level: int = 0
         return new_df
 
     except KeyError as e:
-        data_pipeline_logger.log_info(
-            message=f"At {datetime.datetime.now()}, got error: {e}"
-        )
+        data_pipeline_logger.log_info(message=f"At {datetime.datetime.now()}, got error: {e}")
         raise
