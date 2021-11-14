@@ -5,7 +5,7 @@ from typing import Union
 import datetime
 
 load_logger = CustomLogger.construct_logger(
-    name="CONFIG", log_file_path=get_root_path() + "logs/LOAD.log", logger_level=40
+    name=__name__, log_file_path=get_root_path() + "logs/LOAD.log", logger_level=40
 )
 
 

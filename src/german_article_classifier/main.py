@@ -1,4 +1,10 @@
-from german_article_classifier.datapipeline.pre_processing_pipeline import run_pre_processing_pipeline
+import os.path
+import fastapi
+import catboost
+from catboost import Pool, CatBoostClassifier
+from german_article_classifier.utils.config import read_yaml, get_root_path
 
-df_test = run_pre_processing_pipeline(dataset_level=2)
-print(df_test.head(4))
+CONFIG = read_yaml(root_path=get_root_path())
+model_path = os.path.join(get_root_path(), CONFIG["model_path"], CONFIG["model_name"])
+model = CatBoostClassifier()
+model.load_model(fname=model_path)

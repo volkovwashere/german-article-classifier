@@ -18,7 +18,7 @@ def get_root_path() -> str:
 
 
 config_logger = CustomLogger.construct_logger(
-    name="CONFIG", log_file_path=get_root_path() + "logs/CONFIG.log", logger_level=20
+    name=__name__, log_file_path=get_root_path() + "logs/CONFIG.log", logger_level=20
 )
 
 

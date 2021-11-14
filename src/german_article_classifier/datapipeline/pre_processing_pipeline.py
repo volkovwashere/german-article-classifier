@@ -14,7 +14,7 @@ import datetime
 
 CONFIG = read_yaml(root_path=get_root_path())
 data_pipeline_logger = CustomLogger.construct_logger(
-    name="CONFIG", log_file_path=get_root_path() + "logs/DATAPIPELINE.log", logger_level=40
+    name=__name__, log_file_path=get_root_path() + "logs/DATAPIPELINE.log", logger_level=40
 )
 
 
