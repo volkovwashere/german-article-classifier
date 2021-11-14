@@ -17,7 +17,7 @@ def run_pre_processing_pipeline(*, is_split: bool = True, dataset_level: int = 0
     """
     This function transforms and loads the specified dataset for training. Mainly it lowers, removes punctuation,
     numbers, maps umlaut chars to english ones and removes stop words from a given sentence. This function by default
-    loads in either the test or train dataset, based on the dataset_level and is_split params, where the latter is
+    loads in either the test or train dataset based on the dataset_level and is_split params, where the latter is
     TRUE by default. There are 4 dataset type levels:
     0 - no splitting, raw dataset
     1 - train set
