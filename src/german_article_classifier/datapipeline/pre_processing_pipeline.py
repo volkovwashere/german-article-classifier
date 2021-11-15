@@ -1,8 +1,6 @@
-import os.path
 import pandas as pd
 from german_article_classifier.utils.config import get_root_path, read_yaml
 from german_article_classifier.utils.custom_logger import CustomLogger
-from german_article_classifier.datapipeline.extract import load_dataset_from_csv
 from german_article_classifier.datapipeline.transform import (
     remove_numbers,
     remove_punctuation,
@@ -18,7 +16,7 @@ data_pipeline_logger = CustomLogger.construct_logger(
 )
 
 
-def run_pre_processing_pipeline(*, is_split: bool = True, dataset_level: int = 0) -> Union[pd.DataFrame, None]:
+def run_pre_processing_pipeline(*, df: pd.DataFrame) -> Union[pd.DataFrame, None]:
     """
     This function transforms and loads the specified dataset for training. Mainly it lowers, removes punctuation,
     numbers, maps umlaut chars to english ones and removes stop words from a given sentence. This function by default
@@ -30,20 +28,14 @@ def run_pre_processing_pipeline(*, is_split: bool = True, dataset_level: int = 0
     If the is_split param is FALSE, then the pipeline tries to load in the raw not split dataset and preprocesses it.
 
     Args:
-        is_split (bool): Indicates whether the dataset we are trying to load is split already or not.
-        dataset_level (int): Indicates whether it is the train, test or whole set.
+        df (pd.DataFrame): pandas dataframe that we want to preprocess.
 
     Returns (pd.DataFrame or None): Returns cleaned pandas df else returns None and raises.
 
     """
-    data_pipeline_logger.log_info(f"At {datetime.datetime.now()} started preprocessing...")
+    print("Started preprocessing ...")
     try:
-        if is_split:
-            data_file_name = CONFIG["train_csv"] if dataset_level == 1 else CONFIG["test_csv"]
-        else:
-            data_file_name = CONFIG["data_csv"]
-        data_path = CONFIG["data_path"]
-        new_df = load_dataset_from_csv(data_path=os.path.join(data_path, data_file_name))
+        new_df = df.copy(deep=False)
 
         new_df["text"] = new_df["text"].str.lower()
         new_df["label"] = new_df["label"].str.lower()
@@ -54,8 +46,17 @@ def run_pre_processing_pipeline(*, is_split: bool = True, dataset_level: int = 0
         new_df["text"] = new_df["text"].apply(stop_word_removal)
 
         data_pipeline_logger.log_info(f"... at {datetime.datetime.now()} finished preprocessing.")
+        print("... finished preprocessing.")
         return new_df
-
-    except KeyError as e:
+    except Exception as e:
         data_pipeline_logger.log_info(message=f"At {datetime.datetime.now()}, got error: {e}")
         raise
+
+
+def pre_process_text(document: str) -> str:
+    document = document.lower()
+    document = remove_punctuation(document=document)
+    document = remove_numbers(document=document)
+    document = map_umlaut(document=document)
+    document = stop_word_removal(document=document)
+    return document
