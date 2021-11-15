@@ -1,6 +1,7 @@
 import re
 from nltk.corpus import stopwords
-
+import nltk
+nltk.download("stopwords")
 
 GERMAN_STOP_WORDS = stopwords.words('german')
 GERMAN_STOP_WORDS.append("fur")

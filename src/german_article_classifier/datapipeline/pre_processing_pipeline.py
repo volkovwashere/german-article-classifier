@@ -1,6 +1,6 @@
 import pandas as pd
 from german_article_classifier.utils.config import get_root_path, read_yaml
-from german_article_classifier.utils.custom_logger import CustomLogger
+# from german_article_classifier.utils.custom_logger import CustomLogger
 from german_article_classifier.datapipeline.transform import (
     remove_numbers,
     remove_punctuation,
@@ -8,12 +8,11 @@ from german_article_classifier.datapipeline.transform import (
     map_umlaut,
 )
 from typing import Union
-import datetime
-
+# import datetime
 CONFIG = read_yaml(root_path=get_root_path())
-data_pipeline_logger = CustomLogger.construct_logger(
-    name=__name__, log_file_path=get_root_path() + "logs/DATAPIPELINE.log", logger_level=40
-)
+# data_pipeline_logger = CustomLogger.construct_logger(
+#     name=__name__, log_file_path=get_root_path() + "logs/DATAPIPELINE.log", logger_level=40
+# )
 
 
 def run_pre_processing_pipeline(*, df: pd.DataFrame) -> Union[pd.DataFrame, None]:
@@ -45,11 +44,11 @@ def run_pre_processing_pipeline(*, df: pd.DataFrame) -> Union[pd.DataFrame, None
         new_df["text"] = new_df["text"].apply(map_umlaut)
         new_df["text"] = new_df["text"].apply(stop_word_removal)
 
-        data_pipeline_logger.log_info(f"... at {datetime.datetime.now()} finished preprocessing.")
+        # data_pipeline_logger.log_info(f"... at {datetime.datetime.now()} finished preprocessing.")
         print("... finished preprocessing.")
         return new_df
     except Exception as e:
-        data_pipeline_logger.log_info(message=f"At {datetime.datetime.now()}, got error: {e}")
+        # data_pipeline_logger.log_info(message=f"At {datetime.datetime.now()}, got error: {e}")
         raise
 
 

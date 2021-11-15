@@ -1,7 +1,7 @@
 import yaml
 import os
-from german_article_classifier.utils.custom_logger import CustomLogger
-import datetime
+# from german_article_classifier.utils.custom_logger import CustomLogger
+# import datetime
 from typing import Union
 
 
@@ -17,10 +17,10 @@ def get_root_path() -> str:
     return os.getcwd().split(work_dir)[0]
 
 
-config_logger = CustomLogger.construct_logger(
-    name=__name__, log_file_path=get_root_path() + "logs/CONFIG.log", logger_level=20
-)
-
+# config_logger = CustomLogger.construct_logger(
+#     name=__name__, log_file_path=get_root_path() + "logs/CONFIG.log", logger_level=20
+# )
+print("ROOT PATH IS: ", get_root_path())
 
 def read_yaml(*, root_path: str, config_path: str = "properties/dev.yaml") -> Union[dict, None]:
     """
@@ -32,12 +32,20 @@ def read_yaml(*, root_path: str, config_path: str = "properties/dev.yaml") -> Un
     Returns (str): Dictionary with CONFIG key / value pairs.
 
     """
+    print(os.path.join(root_path, config_path))
+
     try:
-        with open(root_path + config_path, mode="r") as stream:
+        with open(root_path + "/" + config_path, mode="r") as stream:
             try:
                 return yaml.safe_load(stream=stream)
             except yaml.YAMLError as e:
-                config_logger.log_info(message=f"At {datetime.datetime.now()} error {e} occurred.")
+                print("yamlerror")
+                # config_logger.log_info(message=f"At {datetime.datetime.now()} error {e} occurred.")
+                raise
 
     except FileNotFoundError as e:
-        config_logger.log_info(message=f"At {datetime.datetime.now()} error {e} occurred.")
+        # config_logger.log_info(message=f"At {datetime.datetime.now()} error {e} occurred.")
+        print("filenotfounderror")
+        raise
+
+read_yaml(root_path=get_root_path())
