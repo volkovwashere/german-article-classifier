@@ -10,6 +10,7 @@ The application was built with:
 
 <!-- Getting started -->
 # Prequisites
+
 <!-- Installation guides -->
 <!-- Usage -->
 <!-- Contact -->
