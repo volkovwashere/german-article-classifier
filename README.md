@@ -13,7 +13,7 @@ The application was built with:
 <!-- Getting started -->
 ## Getting started
 ### Prequisites
-For the prequisites you need python 3.9 (3.7 at least) installed on your machine with anaconda preferred as environment management. Other than that you will need CUDA 11.3 as well.
+For the prequisites you need python 3.9 (3.7 at least) installed on your machine with anaconda preferred as environment management. Other than that you will need CUDA 11.3 as well. if you want to run the PyTorch or CatBoost training otherwise CUDA is not needed!
 <br />https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
 <br />https://www.anaconda.com/products/individual
 
