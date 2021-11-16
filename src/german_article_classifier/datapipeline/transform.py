@@ -1,9 +1,10 @@
 import re
 from nltk.corpus import stopwords
 import nltk
+
 nltk.download("stopwords")
 
-GERMAN_STOP_WORDS = stopwords.words('german')
+GERMAN_STOP_WORDS = stopwords.words("german")
 GERMAN_STOP_WORDS.append("fur")
 
 
@@ -16,7 +17,7 @@ def remove_punctuation(document: str) -> str:
     Returns (str): Subbed sentence. Eg.: This is a sentence
 
     """
-    return re.sub(r'[^\w\s]', '', document)
+    return re.sub(pattern=r"[^\w\s]", repl="", string=document)
 
 
 def remove_numbers(document: str) -> str:
@@ -28,7 +29,7 @@ def remove_numbers(document: str) -> str:
     Returns (str): Subbed sentence. Eg.: This is, a sentence
 
     """
-    return re.sub(r'$\d+\W+|\b\d+\b|\W+\d+$', '', document)
+    return re.sub(pattern=r"[0-9]+", repl="", string=document)
 
 
 def map_umlaut(document: str) -> str:
