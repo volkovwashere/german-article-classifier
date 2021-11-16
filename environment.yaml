@@ -1,4 +1,4 @@
-name: kaggle-cell-segmentation
+name: german-article-classifier
 channels:
   - defaults
 dependencies:
@@ -130,4 +130,4 @@ dependencies:
     - webencodings==0.5.1
     - websockets==10.0
     - widgetsnbextension==3.5.2
-prefix: C:\Users\volko\miniconda3\envs\kaggle-cell-segmentation
+
