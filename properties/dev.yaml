@@ -1,0 +1,16 @@
+data_path: "D:/10kgerdataset/"
+train_csv: "train.csv"
+test_csv: "test.csv"
+data_csv: "articles.csv"
+model_path: "src/german_article_classifier/models/"
+model_name: "CatGnad"
+model_out_path: "src/german_article_classifier/models/CatGnad02"
+model_params:
+    iterations: 500
+    lr: 0.2
+    eval_metric: "Accuracy"
+    task_type: "GPU"
+    early_stopping_rounds: 300
+    use_best_model: True
+    verbose: 500
+save: True
