@@ -1,6 +1,5 @@
+import logging
 import pandas as pd
-from german_article_classifier.utils.config import get_root_path, read_yaml
-# from german_article_classifier.utils.custom_logger import CustomLogger
 from german_article_classifier.datapipeline.transform import (
     remove_numbers,
     remove_punctuation,
@@ -8,11 +7,9 @@ from german_article_classifier.datapipeline.transform import (
     map_umlaut,
 )
 from typing import Union
-# import datetime
-CONFIG = read_yaml(root_path=get_root_path())
-# data_pipeline_logger = CustomLogger.construct_logger(
-#     name=__name__, log_file_path=get_root_path() + "logs/DATAPIPELINE.log", logger_level=40
-# )
+import datetime
+
+data_pipeline_logger = logging.getLogger("classifier.pre_processing_pipeline")
 
 
 def run_pre_processing_pipeline(*, df: pd.DataFrame) -> Union[pd.DataFrame, None]:
@@ -32,7 +29,7 @@ def run_pre_processing_pipeline(*, df: pd.DataFrame) -> Union[pd.DataFrame, None
     Returns (pd.DataFrame or None): Returns cleaned pandas df else returns None and raises.
 
     """
-    print("Started preprocessing ...")
+    data_pipeline_logger.info(f"Started preprocessing at {datetime.datetime.now()}")
     try:
         new_df = df.copy(deep=False)
 
@@ -44,18 +41,29 @@ def run_pre_processing_pipeline(*, df: pd.DataFrame) -> Union[pd.DataFrame, None
         new_df["text"] = new_df["text"].apply(map_umlaut)
         new_df["text"] = new_df["text"].apply(stop_word_removal)
 
-        # data_pipeline_logger.log_info(f"... at {datetime.datetime.now()} finished preprocessing.")
-        print("... finished preprocessing.")
+        data_pipeline_logger.info(f"... at {datetime.datetime.now()} finished preprocessing.")
         return new_df
     except Exception as e:
-        # data_pipeline_logger.log_info(message=f"At {datetime.datetime.now()}, got error: {e}")
+        data_pipeline_logger.info(f"At {datetime.datetime.now()}, got error: {e}")
         raise
 
 
 def pre_process_text(document: str) -> str:
-    document = document.lower()
-    document = remove_punctuation(document=document)
-    document = remove_numbers(document=document)
-    document = map_umlaut(document=document)
-    document = stop_word_removal(document=document)
-    return document
+    """
+    This function pre processes one string and returns normalized data.
+    Args:
+        document (str): Input string.
+
+    Returns (str): Normalized string
+
+    """
+    try:
+        document = document.lower()
+        document = remove_punctuation(document=document)
+        document = remove_numbers(document=document)
+        document = map_umlaut(document=document)
+        document = stop_word_removal(document=document)
+        return document
+
+    except Exception as e:
+        data_pipeline_logger.warning(f"At {datetime.datetime.now()}, got error: {e}")
