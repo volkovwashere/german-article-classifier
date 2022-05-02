@@ -14,7 +14,6 @@ def test_get_predict():
         return np.array([str(text)])
 
     monkey_patch.setattr(predictor, "predict_text", mock_predict_text)
-    res = client.get("/classifier/predict?text=asd")
     assert res.status_code == 200
     assert type(res.json()) == dict
 
