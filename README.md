@@ -23,7 +23,7 @@ For the prequisites you need python 3.9 (3.7 at least) installed on your machine
 git clone https://github.com/volkovwashere/german-article-classifier.git
 ~~~
 ~~~
-ENV PYTHONPATH "${PYTHONPATH}:/german-article-classifier/src"
+export PYTHONPATH=$PYTHONPATH:/home/<your_username>/german-article-classifier/src
 ~~~
 ~~~
 cd german-article-classifier
