@@ -1,7 +1,7 @@
 # German Article Classifier
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-There are many great text classifiers for english text, however for other languages there is less. For that reason, I created a gemrnal article classifier REST API based on the dataset: https://tblock.github.io/10kGNAD/. For the backend model two models was used, XGBoosted trees (with catboost) and a simple Bi-LSTM neural network with pytorch. The data analysis can be found in the DATAANALYSIS.md and the model comparison and training results can be found in the PERFORMANCEANALYSIS.md files. 
+There are many great text classifiers for english text, however for other languages there is less. For that reason, I created a german article classifier REST API based on the dataset: https://tblock.github.io/10kGNAD/. For the backend model two models was used, XGBoosted trees (with catboost) and a simple Bi-LSTM neural network with pytorch. The data analysis can be found in the DATAANALYSIS.md and the model comparison and training results can be found in the PERFORMANCEANALYSIS.md files. 
 
 ## Built with
 The application was built with:
